@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>☠️XDEAD-Discord</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0e1620;
+  --panel:#172028;
+  --muted:#9aa7b0;
+  --accent:#1de8c5;
+  --accent-2:#4bd6ff;
+  --neon:#2ff4bd;
+  --danger:#ffb86b;
+  --glass: rgba(255,255,255,0.03);
+  --glass-2: rgba(255,255,255,0.02);
+  --border: rgba(255,255,255,0.06);
+  --card:#142029;
+  --radius:14px;
+}
+
+*{box-sizing:border-box}
+html, body {
+  min-height: 100%;
+  margin: 0;
+  font-family: Poppins, system-ui, Segoe UI, Roboto, Arial;
+  background: linear-gradient(180deg, #0c1a2a 0%, #132b3d 50%, #0e1620 100%);
+  color: #d7eef0;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(45,230,190,0.15) 0%, transparent 70%);
+  animation: floatGlow 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes floatGlow {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(50px, 30px) scale(1.1); }
+  100% { transform: translate(0,0) scale(1); }
+}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:32px auto;padding:28px; position: relative; z-index: 1}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.logo-wrap{display:flex;align-items:center;gap:16px}
+.logo{
+  width:130px;height:130px;border-radius:24px;
+  background:linear-gradient(180deg,#14313a,#0e2228);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow: 0 6px 30px rgba(0,0,0,0.6), inset 0 -8px 24px rgba(0,0,0,0.4);
+  position:relative;
+  border: 2px solid rgba(255,255,255,0.03);
+}
+.logo::before{
+  content:'';
+  width:92px;
+  height:92px;
+
+  background:
+    url("https://i.ibb.co/5PQL4vX/6f842cec1bbd1622cb8d0dd7046874f7-removebg-preview-1.png") center/contain no-repeat,
+    conic-gradient(
+      from 90deg at 50% 50%,
+     #000 0 30deg,
+      #000 30deg 120deg,
+      #000 120deg 220deg,
+      #000 220deg 360deg
+    );
+
+  transform: rotate(12deg);
+  border-radius:12px;
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.6),
+    0 0 16px rgba(45,230,190,0.06);
+}
+
+.site-title{font-weight:700;letter-spacing:1px}
+.site-sub{font-size:13px;color:var(--muted);margin-top:6px}
+
+.btn {
+  background:var(--panel); padding:10px 18px;border-radius:40px;border:1px solid var(--border);
+  color:var(--muted); display:inline-flex; gap:10px; align-items:center; cursor:pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+}
+.btn:hover{transform:translateY(-2px)}
+
+.hero{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:30px 0;flex-wrap:wrap}
+.hero-left, .hero-right{flex:1;min-width:200px}
+.hero-center{flex:0 0 210px;display:flex;align-items:center;justify-content:center}
+.server-name{font-family:'Press Start 2P',monospace;font-size:20px;color:var(--accent);text-align:center;letter-spacing:1px}
+.server-mode{font-size:12px;color:var(--muted);text-align:center;margin-top:6px}
+
+.ip-card{
+  display:inline-flex;align-items:center;gap:18px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(45,230,190,0.08); box-shadow: 0 8px 40px rgba(45,230,190,0.03); cursor:pointer;
+}
+.ip-bubble{width:56px;height:56px;border-radius:50%;background:linear-gradient(180deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#062a24;box-shadow:0 6px 30px rgba(45,230,190,0.06)}
+.ip-info{display:flex;flex-direction:column}
+.ip-text{font-weight:700;color:var(--neon);letter-spacing:0.6px}
+.ip-sub{font-size:12px;color:var(--muted);margin-top:6px}
+
+.glow { position:relative;padding:10px 14px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.06);cursor:pointer; }
+.glow:hover{transform:translateY(-2px)}
+.glow:after{
+  content:'';position:absolute;left:-6px;right:-6px;top:-6px;bottom:-6px;border-radius:14px;
+  background:linear-gradient(90deg, rgba(42,239,200,0.06), rgba(75,214,255,0.04));
+  filter:blur(18px);opacity:0;transition:.3s;
+}
+.glow.active:after{opacity:1}
+
+.rules-area{margin-top:30px}
+.tabs{display:flex;gap:8px}
+.tab{padding:10px 14px;border-radius:10px;background:var(--panel);cursor:pointer;color:var(--muted)}
+.tab.active{background:linear-gradient(90deg, rgba(45,230,190,0.06), rgba(75,214,255,0.03)); color: #042b26; font-weight:700}
+.rules-card{margin-top:12px;padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); color:var(--muted)}
+.rule{padding:10px 12px;border-radius:8px;background:rgba(0,0,0,0.03);margin-bottom:8px}
+
+/* Staff Panel */
+.staff-btn{position:fixed;right:16px;bottom:18px;z-index:60;background:linear-gradient(180deg,#052b26,#0b3b35);
+  padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);cursor:pointer;color:var(--neon);box-shadow: 0 12px 40px rgba(0,0,0,0.6)}
+.staff-panel{position:fixed;right:-420px;top:0;height:100%;width:380px;background:linear-gradient(180deg,#0e1620,#071218);box-shadow:-24px 0 60px rgba(0,0,0,0.7);padding:20px;border-left:1px solid rgba(255,255,255,0.03);transition: right .35s cubic-bezier(.2,.8,.2,1);z-index:80;overflow-y:auto;}
+.staff-panel.open{right:0}
+.staff-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.staff-cat{margin-top:12px}
+.staff-role{font-weight:700;color:var(--accent);margin-bottom:8px}
+.member{padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.02);margin-bottom:8px;color:var(--muted);display:flex;gap:12px;align-items:center}
+.member .dot{width:36px;height:36px;border-radius:8px;background:linear-gradient(180deg,#2ff4bd,#4bd6ff);display:flex;align-items:center;justify-content:center;font-weight:700;color:#062a24}
+
+#ytPanel,#acceptPanel,#rejectPanel,#listPanel{
+  position:fixed;top:80px;right:-450px;width:400px;background:linear-gradient(180deg,#0e1620,#071218);box-shadow:-24px 0 60px rgba(0,0,0,0.7);padding:20px;border-left:1px solid rgba(255,255,255,0.03);transition: right .35s;z-index:90;max-height:80%;overflow-y:auto;border-radius:10px;
+}
+.panel.open{right:16px;}
+.panel h3{margin:0 0 12px 0;color:var(--accent);}
+.panel input{width:100%;margin-bottom:10px;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:var(--panel);color:#fff;}
+.panel button{padding:8px 12px;margin-right:6px;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background:var(--accent);color:#000;cursor:pointer;}
+.panel button.reject{background:var(--danger);}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<div class="logo-wrap">
+  <div class="logo"></div>
+  <div>
+    <div class="site-title">XDEAD</div>
+    <div class="site-sub">A guild Of HylexMC LifeSteal | Survival •</div>
+  </div>
+</div>
+</header>
+
+<section class="hero">
+<div class="hero-left">
+  <div class="ip-card">
+    <div class="ip-bubble">▶</div>
+    <div class="ip-info">
+      <div class="ip-sub">Server : <strong style="color:var(--accent)">HylexMC</strong></div>
+    </div>
+  </div>
+</div>
+<div class="hero-center">
+  <div>
+    <div class="server-name">☠️ XDEAD ☠️ Discord</div>
+    <div class="server-mode"> | THE FUTURE BEST GUILD OF | LifeSteal ❤️ | Survival ⛏️  </div>
+  </div>
+</div>
+<div class="hero-right" style="text-align:right; margin-top:20px">
+  <div style="display:inline-flex;align-items:center;gap:12px">
+    <div style="text-align:right">
+      <div style="font-weight:700;color:var(--accent-2);">DISCORD SERVER</div>
+      <div style="font-size:12px;color:var(--muted)">Click Emoji to join</div>
+    </div>
+    <button class="glow" id="discordBtn"><span style="font-size:24px">💬</span></button>
+  </div>
+</div>
+</section>
+
+<div class="rules-area">
+<div style="display:flex;justify-content:space-between;align-items:center">
+  <div class="selector-title">RULES</div>
+  <div style="font-size:12px;color:var(--muted)">Read before Text In Discord Server</div>
+</div>
+<h4>Follow this rules for a healty invoirenment in Discord server 💬 </h4>
+
+<div class="tabs" style="margin-top:12px">
+
+  <div class="tab" data-tab="discord">Discord Rules</div>
+</div>
+ <div class="rules-card">
+      <div id="rules-server">
+        <div class="rule"><strong>1.</strong> 📜 ┃ SERVER RULES ┃ 📜 </div>
+<div class="rule"><strong>1.</strong>1️⃣ Be Respectful </div>
+→ Respect all members and staff. No harassment, insults, or hate speech.
+
+<div class="rule"><strong>1.</strong>2️⃣ No Spamming</div>
+→ No message spam, emoji spam, caps spam, or tag spam.
+
+<div class="rule"><strong>1.</strong>3️⃣ No NSFW Content </div>
+→ NSFW, 18+, or inappropriate content is strictly forbidden.
+
+<div class="rule"><strong>1.</strong>4️⃣ No Advertising </div>
+→ No self-promotion, server links, or DM ads without staff permission.
+
+<div class="rule"><strong>1.</strong>5️⃣ Follow Discord TOS</div>
+→ Anything against Discord’s Terms of Service is not allowed.
+
+<div class="rule"><strong>1.</strong>6️⃣ Use Correct Channels</div>
+→ Talk in the relevant channels only. Read channel topics before chatting.
+
+<div class="rule"><strong>1.</strong>7️⃣ No Scams or Fake Links</div>
+→ Scamming, phishing, or fake giveaways = instant ban.
+
+<div class="rule"><strong>1.</strong>8️⃣ Listen to Staff</div>
+→ Staff decisions are final. Arguing may lead to punishment.
+
+<div class="rule"><strong>1.</strong>9️⃣ No Drama</div>
+→ Personal fights, political/religious fights, or toxic behavior are not allowed.
+
+<div class="rule"><strong>1.</strong>🔟 Have Fun!</div>
+→ Enjoy the server, make friends, and keep the environment friendly 😊
+
+<div class="rule"><strong>1.</strong>⚠️ Breaking rules may result in:</div>
+Mute • Kick • Ban (Depends on severity). 
+      </div>
+  <div id="rules-discord" style="display:none">
+    <div class="rule"><strong>1.</strong> 📜 ┃ SERVER RULES ┃ 📜 </div>
+<div class="rule"><strong>1.</strong>1️⃣ Be Respectful </div>
+→ Respect all members and staff. No harassment, insults, or hate speech.
+
+<div class="rule"><strong>1.</strong>2️⃣ No Spamming</div>
+→ No message spam, emoji spam, caps spam, or tag spam.
+
+<div class="rule"><strong>1.</strong>3️⃣ No NSFW Content </div>
+→ NSFW, 18+, or inappropriate content is strictly forbidden.
+
+<div class="rule"><strong>1.</strong>4️⃣ No Advertising </div>
+→ No self-promotion, server links, or DM ads without staff permission.
+
+<div class="rule"><strong>1.</strong>5️⃣ Follow Discord TOS</div>
+→ Anything against Discord’s Terms of Service is not allowed.
+
+<div class="rule"><strong>1.</strong>6️⃣ Use Correct Channels</div>
+→ Talk in the relevant channels only. Read channel topics before chatting.
+
+<div class="rule"><strong>1.</strong>7️⃣ No Scams or Fake Links</div>
+→ Scamming, phishing, or fake giveaways = instant ban.
+
+<div class="rule"><strong>1.</strong>8️⃣ Listen to Staff</div>
+→ Staff decisions are final. Arguing may lead to punishment.
+
+<div class="rule"><strong>1.</strong>9️⃣ No Drama</div>
+→ Personal fights, political/religious fights, or toxic behavior are not allowed.
+
+<div class="rule"><strong>1.</strong>🔟 Have Fun!</div>
+→ Enjoy the server, make friends, and keep the environment friendly 😊
+
+<div class="rule"><strong>1.</strong>⚠️ Breaking rules may result in:</div>
+Mute • Kick • Ban (Depends on severity). 
+      </div>
+</div>
+<!-- Staff List -->
+<button class="staff-btn" id="openStaff" style="bottom:130px;">Click to see Staff list</button>
+<div class="staff-panel" id="staffPanel">
+<div class="staff-header">
+<div>
+  <div style="font-weight:800;color:var(--neon)">FLUXMC Staff</div>
+</div>
+<div><button class="btn" id="closeStaff">Close</button></div>
+</div>
+<div class="staff-cat">
+<div class="staff-role">👑[OWNER]</div>
+<div class="member">
+  <div class="dot">1</div>
+  <img 
+    src="https://i.ibb.co/rfQKnDj4/Chat-GPT-Image-Jan-2-2026-04-43-02-PM.png"
+    class="member-img"
+  >
+  👑[OWNER] Deadlord
+</div>
+
+<style>
+.member-img{
+  width: 28px;      /* size yahan control karo */
+  height: 28px;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+</style>
+
+<div class="member"><div class="dot">2</div>👑[OWNER] lbbbl </div>
+</div>
+<div class="staff-cat">
+<div class="staff-role">🛡️[ADMIN]</div> 
+<div class="member"><div class="dot">3</div>🛡️[ADMIN] DoomSlayer</div>
+</div>
+<div class="staff-cat">
+<div class="staff-role">🤖[ADMIN-BOT]</div>
+<div class="member"><div class="dot">4</div>🤖[ADMIN-BOT]ProBot</div>
+</div>    
+<div class="staff-cat">
+<div class="staff-role">🤝[Helper]</div>
+<div class="member"><div class="dot">5</div>🤝[Helper]Not Decided</div>
+<div class="staff-cat">
+  <div class="staff-role">✨[Special Member]</div>
+  <div class="member"><div class="dot">6</div>✨[Special Member]Kaizux41E</div>
+  <div class="member"><div class="dot">7</div>✨[Special Member]SkyKnight67</div>
+  <div class="member"><div class="dot">8</div>✨[Special Member]khogen</div>
+  <div class="member"><div class="dot">9</div>✨[Special Member]Its_Ben</div>
+</div>
+</div>
+</div>
+
+<script>
+// Tabs
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = tab.dataset.tab;
+    document.getElementById('rules-server').style.display = target==='server'?'block':'none';
+    document.getElementById('rules-discord').style.display = target==='discord'?'block':'none';
+  });
+});
+
+// Staff panel
+const staffBtn=document.getElementById('openStaff');const staffPanel=document.getElementById('staffPanel');const closeStaff=document.getElementById('closeStaff');
+staffBtn.addEventListener('click',()=>{staffPanel.classList.add('open');staffPanel.setAttribute('aria-hidden','false');});
+closeStaff.addEventListener('click',()=>{staffPanel.classList.remove('open');staffPanel.setAttribute('aria-hidden','true');});
+
+// YT Panel
+const ytBtn=document.getElementById('openYT');const ytPanel=document.getElementById('ytPanel');
+ytBtn.addEventListener('click',()=>{ytPanel.classList.toggle('open');});
+
+// List Panel
+const listBtn=document.getElementById('openList');const listPanel=document.getElementById('listPanel');
+const listPass=document.getElementById('listPass');const listUnlock=document.getElementById('listUnlock');const applicantsDiv=document.getElementById('applicants');
+
+let records=JSON.parse(localStorage.getItem('records')||'[]');
+let accepted=JSON.parse(localStorage.getItem('accepted')||'[]');
+let rejected=JSON.parse(localStorage.getItem('rejected')||'[]');
+
+function saveData(){localStorage.setItem('records',JSON.stringify(records));localStorage.setItem('accepted',JSON.stringify(accepted));localStorage.setItem('rejected',JSON.stringify(rejected));}
+
+function renderApplicants(){
+  applicantsDiv.innerHTML='';
+  records.forEach((r,i)=>{
+    const div=document.createElement('div');div.style.background='rgba(255,255,255,0.02)';div.style.marginBottom='6px';div.style.padding='6px';
+    div.innerHTML=`<b>${r.name}</b> (${r.url})<br>IG: ${r.ig} | Discord: ${r.disc} <br>
+    <button onclick="accept(${i})">Accept</button><button class="reject" onclick="reject(${i})">Reject</button>`;
+    applicantsDiv.appendChild(div);
+  });
+}
+function renderAcceptReject(){
+  document.getElementById('acceptList').innerHTML='';accepted.forEach(a=>{const d=document.createElement('div');d.textContent=a.name;document.getElementById('acceptList').appendChild(d);});
+  document.getElementById('rejectList').innerHTML='';rejected.forEach(a=>{const d=document.createElement('div');d.textContent=a.name;document.getElementById('rejectList').appendChild(d);});
+}
+
+function accept(i){accepted.push(records[i]);records.splice(i,1);saveData();renderApplicants();renderAcceptReject();}
+function reject(i){rejected.push(records[i]);records.splice(i,1);saveData();renderApplicants();renderAcceptReject();}
+
+listUnlock.addEventListener('click',()=>{
+  if(listPass.value==='048840'){listPanel.classList.add('open'); renderApplicants();}
+  else{alert('Wrong Password');}
+});
+
+document.getElementById('ytSubmit').addEventListener('click',()=>{
+  const n=document.getElementById('ytName').value;
+  const u=document.getElementById('ytURL').value;
+  const g=document.getElementById('ytGame').value;
+  const d=document.getElementById('ytDisc').value;
+  if(n&&u&&g&&d){records.push({name:n,url:u,ig:g,disc:d});saveData();alert('Submitted');document.getElementById('ytName').value='';document.getElementById('ytURL').value='';document.getElementById('ytGame').value='';document.getElementById('ytDisc').value='';renderApplicants();}else{alert('Fill all fields');}
+});
+
+// Discord & IP
+document.getElementById('discordBtn').addEventListener('click',()=>window.open('https://discord.gg/jSQrzyhQ','_blank'));
+const ipCard = document.querySelector('.ip-card');
+ipCard.addEventListener('click',()=>{navigator.clipboard.writeText("COMING SOON");alert('Copied!');});
+renderAcceptReject();
+</script>
+</body>
+</html>
